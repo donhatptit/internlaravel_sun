@@ -17,7 +17,7 @@ class AuthorsController extends Controller
     {
 
         $author = Authors::all();
-        return view('listauthors', ['author' => $author]);
+        return view('authors.listauthors', ['author' => $author]);
     }
 
     /**
@@ -27,7 +27,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        return view('addauthors');
+        return view('authors.addauthors');
     }
 
     /**
@@ -44,6 +44,7 @@ class AuthorsController extends Controller
         $authors->sex = $request->gender;
         $authors->address = $request->quequan;
         $authors->save();
+        $request->session()->flash('status', 'Bạn đã thêm thành công!');
         return redirect(route('author.manager'));
     }
 
@@ -67,7 +68,7 @@ class AuthorsController extends Controller
     public function edit($id)
     {
         $editauthors = Authors::find($id);
-        return view ('editauthors', ['editauthors'=> $editauthors]);
+        return view ('authors.editauthors', ['editauthors'=> $editauthors]);
     }
 
     /**
@@ -85,6 +86,7 @@ class AuthorsController extends Controller
         $updateauthors->sex = $request->input('gender');
         $updateauthors->address = $request->quequan;
         $updateauthors->save();
+        $request->session()->flash('message', 'Bạn đã sửa thành công !');
         return redirect(route('author.manager'));
     }
 
@@ -97,6 +99,7 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $authors = Authors::find($id)->delete();
+        session()->flash('mess', 'Bạn đã xóa thành công!');
         return redirect(route('author.manager'));
 
     }

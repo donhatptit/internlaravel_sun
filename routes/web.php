@@ -18,13 +18,25 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['prefix'=> 'author', 'middleware'=>'auth'], function (){
-    Route::get('index', 'AuthorsController@index')->name('author.manager');;
-    Route::get('add', 'AuthorsController@create')->name('add');
-    Route::post('add', 'AuthorsController@store')->name('add.author');
-    Route::get('edit/{id}', 'AuthorsController@edit')->name('edit');
-    Route::post('edit/{id}', 'AuthorsController@update')->name('update.author');
-    Route::get('delete/{id}', 'AuthorsController@destroy');
+Route::group(['prefix'=> 'admin', 'middleware'=>'auth'], function (){
+    Route::group(['prefix'=> 'author'], function(){
+        Route::get('list', 'AuthorsController@index')->name('author.manager');;
+        Route::get('add', 'AuthorsController@create')->name('addauthor');
+        Route::post('add', 'AuthorsController@store')->name('add.author');
+        Route::get('edit/{id}', 'AuthorsController@edit')->name('editauthor');
+        Route::post('edit/{id}', 'AuthorsController@update')->name('update.author');
+        Route::get('delete/{id}', 'AuthorsController@destroy')->name('deleteauthor');
+    });
+    Route::group(['prefix'=>'user'], function(){
+        Route::get('list','UserController@index')->name('user.manager');
+        Route::get('add','UserController@create')->name('adduser');
+        Route::post('add', 'UserController@store')->name('add.user');
+        Route::get('edit/{id}', 'UserController@edit')->name('edituser');
+        Route::post('edit/{id}','UserController@update')->name('update.user');
+        Route::get('delete/{id}', 'UserController@destroy')->name('delete.user');
+
+    });
+
 });
 
 

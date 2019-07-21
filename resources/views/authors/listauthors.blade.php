@@ -16,10 +16,29 @@
         margin: auto;
     }
 </style>
+@include('layouts.sibar');
 @section('content')
     <div class="container">
         <h2>Danh sách tác giả</h2>
-        <p><a href="{{ route('add') }}">Thêm</a></p>
+        @if(session('mess'))
+            <div class="alert alert-danger">
+                <li>{{ 'Xóa thành công!' }}</li>
+
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success">
+                <li>{{ 'Sửa thành công!' }}</li>
+
+            </div>
+        @endif
+        @if(session('status'))
+            <div class="alert alert-success">
+                <li>{{ 'Thêm thành công!' }}</li>
+
+            </div>
+        @endif
+        <p><a href="{{ route('addauthor') }}">Thêm</a></p>
 
         <table>
             <tr>
@@ -38,8 +57,8 @@
                     </td>
                     <td>{{ $list->address }}</td>
                     <td>
-                        <span><a href="{{ route('edit', ['id'=> $list->id])}}">Sửa</a></span>&nbsp;&nbsp;
-                        <span><a href="delete/{{ $list->id }}">Xóa</a></span>
+                        <span><a href="{{ route('editauthor', ['id'=> $list->id]) }}">Sửa</a></span>&nbsp;&nbsp;
+                        <span><a href="{{ route('deleteauthor', ['id' => $list->id]) }} " onclick="return window.confirm('Bạn có muốn xóa không?')" >Xóa</a></span>
                     </td>
                 </tr>
             @endforeach

@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $author = Authors::all();
-        return view('listauthors', ['author' => $author]);
+        return view('authors.listauthors', ['author' => $author]);
 
     }
 }

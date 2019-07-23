@@ -69,6 +69,7 @@
 
         <label for="country">Quê quán</label>
         <input type="text" id="quequan" name="quequan" placeholder="Địa chỉ..">
+        <input type="file" name="select_file">
         <input type="submit" value="Submit">
     </form>
 </div>

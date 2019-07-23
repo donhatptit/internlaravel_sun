@@ -43,6 +43,8 @@ class AuthorsController extends Controller
         $authors->name = $request->name;
         $authors->sex = $request->gender;
         $authors->address = $request->quequan;
+        $authors->images =  $request->select_file;
+        $new_images = rand() . '.' .$authors->getClientOriginalExtension();
         $authors->save();
         $request->session()->flash('status', 'Bạn đã thêm thành công!');
         return redirect(route('author.manager'));
